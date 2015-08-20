@@ -67,9 +67,7 @@ public struct LTEmitter {
     }
     
     func update(configureClosure: LTEmitterConfigureClosure? = .None) -> LTEmitter {
-        if let closure = configureClosure {
-            configureClosure!(self.layer, self.cell)
-        }
+        configureClosure?(self.layer, self.cell)
         return self
     }
     
@@ -93,9 +91,7 @@ public class LTEmitterView: UIView {
         } else {
             emitter = LTEmitter(name: name, duration: duration)
             
-            if let closure = configureClosure {
-                configureClosure!(emitter.layer, emitter.cell)
-            }
+            configureClosure?(emitter.layer, emitter.cell)
             
             layer.addSublayer(emitter.layer)
             emitters.updateValue(emitter, forKey: name)
@@ -111,7 +107,7 @@ public class LTEmitterView: UIView {
     }
     
     public func removeAllEmit() {
-        for (name, emitter) in emitters {
+        for (_, emitter) in emitters {
             emitter.layer.removeFromSuperlayer()
         }
         emitters.removeAll(keepCapacity: false)

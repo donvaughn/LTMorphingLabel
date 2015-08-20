@@ -204,7 +204,7 @@ extension LTMorphingLabel {
 
         let topOffset = (self.bounds.size.height - charHeight) / 2.0
         
-        for (i, char) in textToDraw.characters.enumerate() {
+        for (_, char) in textToDraw.characters.enumerate() {
             let charSize = String(char).sizeWithAttributes([NSFontAttributeName: self.font])
             charRects.append(CGRect(origin: CGPointMake(leftOffset, topOffset), size: charSize))
             leftOffset += charSize.width
@@ -279,10 +279,7 @@ extension LTMorphingLabel {
         progress: Float) -> LTCharacterLimbo {
             
             let currentRect = newRects[index]
-            var newX = Float(currentRect.origin.x)
             var currentFontSize = CGFloat(LTEasing.easeOutQuint(progress, 0, Float(font.pointSize)))
-            var currentAlpha:CGFloat = CGFloat(morphingProgress)
-            var yOffset: CGFloat = 0.0
             
             if let closure = effectClosures["\(morphingEffect.description)\(LTMorphingPhaseAppear)"] {
                 return closure(char, index: index, progress: progress)
@@ -301,7 +298,6 @@ extension LTMorphingLabel {
     }
     
     func limboOfCharacters() -> [LTCharacterLimbo] {
-        let fontSize = font.pointSize
         var limbo = [LTCharacterLimbo]()
         
         // Iterate original characters
