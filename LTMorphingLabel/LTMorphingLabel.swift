@@ -66,7 +66,7 @@ typealias LTMorphingSkipFramesClosure =
     @IBInspectable public var morphingCharacterDelay: Float = 0.026
     @IBInspectable public var morphingEnabled: Bool = true
     @IBOutlet public weak var delegate: LTMorphingLabelDelegate?
-    public var morphingEffect: LTMorphingEffect = .Scale
+    public var morphingEffect: LTMorphingEffect = .Evaporate
     
     var startClosures = [String: LTMorphingStartClosure]()
     var effectClosures = [String: LTMorphingEffectClosure]()
